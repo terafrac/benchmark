@@ -12,6 +12,9 @@ u(x,y,z) = 1+x^2+2y^2+3z^2
 
 from dolfin import *
 
+import sys
+
+
 set_log_level(DEBUG)
 
 # Create mesh
@@ -71,4 +74,9 @@ for i in range(0, len(u_array)):
 
 print "Maximum relative error is " + str(max(u_error))
 if max(u_error) < 1e-10:
-    print "OpenFracPoissonBenchmark1 pass"
+    print "OpenFrac benchmark passed."
+    sys.exit(0)
+else:
+    print "OpenFrac Benchmark failed."
+    sys.exit(1)
+
