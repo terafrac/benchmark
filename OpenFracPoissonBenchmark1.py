@@ -55,7 +55,7 @@ L = f*v*dx
 
 # Compute solution
 u = Function(V)
-solve(a == L, u, bc, solver_parameters={"linear_solver" : "gmres", "preconditioner" : "amg"})
+solve(a == L, u, bc, solver_parameters={"linear_solver" : "direct"})
 
 # Plot solution
 #plot(u, interactive=True)
