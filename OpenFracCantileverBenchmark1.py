@@ -80,7 +80,7 @@ def sigma(v):
     return 2*mu*epsilon(v) + lmbda*tr(epsilon(v))*Identity(v.cell().d)
 
 # balance equation
-F = inner(sigma(u), grad(v))*dx + inner(v,top_face_load)*ds(0)
+F = inner(sigma(u), grad(v))*dx + inner(v,top_face_load)*ds
 
 # Extract bilinear and linear forms from F
 a = lhs(F)
@@ -99,8 +99,21 @@ U = u.vector()
 
 solve(A, U, b, 'cg', 'ilu')
 
+# Find average tip deflection
 tip_deflection = 0.0
-tip_deflection_model = 1.5*(top_pressure/youngs_modulus)*beam_width*pow(beam_length/beam_width, 4)
+coordinates = mesh.coordinates()
+#plot(u_z, interactive=True)
+num_pts = 0
+for i in range(mesh.num_vertices()):
+    if abs(coordinates[i][0] - beam_length) < DOLFIN_EPS:
+        tip_deflection += u(coordinates[i])[2]
+        num_pts += 1
+
+tip_deflection /= num_pts
+
+tip_deflection_model = -1.5*(top_pressure/youngs_modulus)*beam_width*pow(beam_length/beam_width, 4)
+print tip_deflection_model
+
 relative_error = abs(tip_deflection / tip_deflection_model - 1.0)
 
 print "Tip deflection is " + str(tip_deflection)
