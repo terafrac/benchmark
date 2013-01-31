@@ -113,11 +113,9 @@ for i in range(mesh.num_vertices()):
 tip_deflection /= num_pts
 
 tip_deflection_model = -1.5*(top_pressure/youngs_modulus)*beam_width*pow(beam_length/beam_width, 4)
-print tip_deflection_model
-
 relative_error = abs(tip_deflection / tip_deflection_model - 1.0)
 
-print "Tip deflection is " + str(tip_deflection)
+print "Relative tip deflection error is " + str(relative_error)
 if relative_error < 5e-4:
     print "OpenFrac benchmark passed."
     sys.exit(0)
