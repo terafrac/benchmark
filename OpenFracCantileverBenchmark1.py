@@ -8,6 +8,8 @@ All units are SI
 Slender beam theory tip deflection is
 
 w(tip) = 1.5 * (pressure / youngs_modulus) * width * (length / width)^4
+
+Mesh is second order tetrahedral elements
 """
 
 from dolfin import *
@@ -17,7 +19,6 @@ import sys
 set_log_level(DEBUG)
 
 # material properties
-rho = 2200.0
 youngs_modulus = 15e9
 poisson_ratio = 0.1
 
