@@ -40,7 +40,7 @@ slab_thickness = 100.0
 box_x = slab_width
 box_y = slab_width
 box_z = slab_thickness
-element_size = 50.0
+element_size = 25.0
 
 num_elements_x = int(box_x / element_size)
 num_elements_y = int(box_y / element_size)
@@ -116,7 +116,7 @@ print "Relative top deflection error is " + str(relative_error)
 print "Top deflection is " + str(top_deflection)
 print "Model deflection is" + str(top_deflection_model)
 
-if relative_error < 5e-4:
+if relative_error < 5e-3:
     print "OpenFrac benchmark passed."
     sys.exit(0)
 else:
